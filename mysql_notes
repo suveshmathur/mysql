@@ -1,0 +1,31 @@
+
+MYISAM : key cache. It only caches index pages from .MYI files. (key_buffer_size)
+
+InnoDB : InnoDB Buffer Pool. It caches data and index pages from InnoDB tables accessed.(innodb_buffer_pool_size)
+
+innodb_log_file_size= 25% of innodb_buffer_pool_size or 2047M, whichever is smaller.
+
+InnoDB offers:
+ACID transactions
+row-level locking
+foreign key constraints
+automatic crash recovery
+table compression (read/write)
+spatial data types (no spatial indexes)
+No Full text search/index
+InnoDB stores both data and indexes in one file. InnoDB uses a buffer pool to cache both data and indexes.
+
+MyISAM offers:
+fast COUNT(*)s (when WHERE, GROUP BY, or JOIN is not used)
+full text indexing (update: supported in InnoDB from MySQL 5.6)
+smaller disk footprint
+very high table compression (read only)
+spatial data types and indexes (R-tree) (update: supported in InnoDB from MySQL 5.7)
+
+MyISAM has table-level locking, but no row-level locking. 
+No transactions. No automatic crash recovery, but it does offer repair table functionality. 
+No foreign key constraints. 
+MyISAM tables are generally more compact in size on disk when compared to InnoDB tables. 
+MyISAM tables could be further highly reduced in size by compressing with myisampack if needed, but become read-only. 
+MyISAM stores indexes in one file and data in another. 
+MyISAM uses key buffers for caching indexes and leaves the data caching management to the operating system.
